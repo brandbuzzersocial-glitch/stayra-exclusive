@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#04100C">
+    <title>Stayra Exclusive | Coming Soon</title>
+    
+    <!-- Google Fonts for Ultra-Luxury Styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,700;0,6..96,800;1,6..96,400;1,6..96,600&family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-emerald-deepest: #020906;
+            --bg-emerald-dark: #04100C;
+            --bg-emerald-mid: #0B251A;
+            --bg-emerald-card: rgba(8, 26, 18, 0.75);
+            
+            --gold-primary: #D4AF37;
+            --gold-light: #F7E7B4;
+            --gold-bright: #FFF3C4;
+            --gold-dark: #99751D;
+            --gold-glow: rgba(212, 175, 55, 0.28);
+            
+            --gold-gradient: linear-gradient(135deg, #F3D683 0%, #D4AF37 35%, #FAF2D4 65%, #AA7C11 100%);
+            --gold-gradient-text: linear-gradient(135deg, #FFF9E6 0%, #E4C26B 30%, #FAF0CC 65%, #C2982B 100%);
+            
+            --text-main: #E6F2EB;
+            --text-muted: #8CA99B;
+            --text-emerald-tint: #B5D4C5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle at 50% 25%, #0D2D20 0%, #051610 55%, #020906 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Subtle Luxury Pattern Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Ambient Lighting Canvas */
+        #interactiveCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Luxury Frame Outer Border */
+        .luxury-frame {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            right: 24px;
+            bottom: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            pointer-events: none;
+            z-index: 2;
+            transition: all 0.5s ease;
+        }
+
+        .luxury-frame::before, .luxury-frame::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .luxury-frame::before {
+            top: -1px;
+            left: -1px;
+            border-right: none;
+            border-bottom: none;
+            box-shadow: -2px -2px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .luxury-frame::after {
+            bottom: -1px;
+            right: -1px;
+            border-left: none;
+            border-top: none;
+            box-shadow: 2px 2px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Main Container */
+        .hero-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1100px;
+            padding: 4.5rem 1.5rem 2.5rem 1.5rem;
+            margin: auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Glassmorphism Luxury Card */
+        .luxury-card {
+            background: var(--bg-emerald-card);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 24px;
+            padding: 4.8rem 3.5rem;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.85),
+                        inset 0 0 50px rgba(11, 37, 26, 0.6),
+                        inset 0 1px 1px rgba(255, 235, 160, 0.3);
+            position: relative;
+            width: 100%;
+            max-width: 880px;
+            overflow: hidden;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .luxury-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 45px 110px rgba(0, 0, 0, 0.9),
+                        inset 0 0 60px rgba(11, 37, 26, 0.7),
+                        inset 0 1px 2px rgba(255, 235, 160, 0.4);
+        }
+
+        /* Gold Shimmer Top Bar */
+        .gold-accent-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 2px;
+            background: var(--gold-gradient);
+            box-shadow: 0 0 20px var(--gold-primary);
+        }
+
+        /* Brand Logo Styling */
+        .brand-logo-container {
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .brand-logo-img {
+            width: 100%;
+            max-width: 390px;
+            height: auto;
+            filter: drop-shadow(0 4px 22px rgba(212, 175, 55, 0.45)) drop-shadow(0 0 35px rgba(255, 235, 160, 0.25));
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .brand-logo-img:hover {
+            transform: scale(1.025);
+            filter: drop-shadow(0 8px 30px rgba(255, 215, 0, 0.65)) drop-shadow(0 0 45px rgba(255, 235, 160, 0.4));
+        }
+
+        .brand-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 14px;
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            margin-top: 0.9rem;
+            margin-left: 14px; /* balance letter-spacing */
+            opacity: 0.95;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Welcome Label */
+        .welcome-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: rgba(247, 231, 180, 0.9);
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .welcome-label::before, .welcome-label::after {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary));
+        }
+        .welcome-label::after {
+            background: linear-gradient(90deg, var(--gold-primary), transparent);
+        }
+
+        /* Coming Soon Tag */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: radial-gradient(circle at center, rgba(13, 42, 29, 0.8) 0%, rgba(4, 16, 12, 0.9) 100%);
+            font-family: 'Cinzel', serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            margin-bottom: 2.4rem;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+            animation: pulseGlow 4s infinite alternate ease-in-out;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--gold-primary);
+            box-shadow: 0 0 10px var(--gold-primary), 0 0 18px var(--gold-primary);
+        }
+
+        @keyframes pulseGlow {
+            0% { border-color: rgba(212, 175, 55, 0.3); box-shadow: 0 0 18px rgba(212, 175, 55, 0.15); }
+            100% { border-color: rgba(255, 235, 160, 0.7); box-shadow: 0 0 32px rgba(212, 175, 55, 0.4); }
+        }
+
+        /* Community Message Box */
+        .community-message-box {
+            max-width: 700px;
+            margin: 0 auto 3.2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            text-align: center;
+        }
+
+        .community-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.05rem, 2.8vw, 1.35rem);
+            font-weight: 800;
+            letter-spacing: 5px;
+            background: var(--gold-gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+        }
+
+        .community-highlight {
+            font-family: 'Bodoni Moda', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            font-weight: 600;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+
+        .community-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.96rem;
+            color: var(--text-emerald-tint);
+            font-weight: 300;
+            line-height: 1.85;
+        }
+
+        .community-emphasis {
+            font-family: 'Bodoni Moda', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--gold-light);
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+
+        /* Gold Diamond Divider */
+        .gold-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--gold-primary);
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin: 0.5rem 0 2rem 0;
+        }
+
+        .gold-divider::before, .gold-divider::after {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5));
+        }
+
+        .gold-divider::after {
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.5), transparent);
+        }
+
+        /* 5-Day Countdown Timer Display */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.4rem;
+            max-width: 620px;
+            margin: 0 auto 3.2rem auto;
+        }
+
+        .timer-card {
+            background: radial-gradient(circle at top, rgba(16, 52, 36, 0.7) 0%, rgba(4, 16, 11, 0.9) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 16px;
+            padding: 1.35rem 0.5rem;
+            position: relative;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(212, 175, 55, 0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .timer-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 18px 40px rgba(212, 175, 55, 0.25), inset 0 0 25px rgba(212, 175, 55, 0.1);
+        }
+
+        .timer-number {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(2.3rem, 5vw, 3.2rem);
+            font-weight: 700;
+            background: var(--gold-gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 0.4rem;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+        }
+
+        .timer-unit {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* Instagram Gold Button */
+        .instagram-link-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .instagram-gold-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--gold-gradient);
+            border: none;
+            border-radius: 50px;
+            padding: 1.05rem 2.8rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.88rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #030C08;
+            text-decoration: none;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
+            white-space: nowrap;
+        }
+
+        /* Shimmer Animation Sheen */
+        .instagram-gold-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transform: rotate(25deg);
+            animation: sheen 5s infinite ease-in-out;
+        }
+
+        @keyframes sheen {
+            0% { left: -60%; }
+            30%, 100% { left: 140%; }
+        }
+
+        .instagram-gold-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 38px rgba(212, 175, 55, 0.65);
+            filter: brightness(1.08);
+        }
+
+        .instagram-gold-btn i {
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 10;
+            padding: 2.2rem 1.5rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(8, 26, 18, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: all 0.35s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-btn:hover {
+            background: var(--gold-gradient);
+            color: #030C08;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .copyright {
+            font-family: 'Cinzel', serif;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            color: rgba(140, 169, 155, 0.55);
+        }
+
+        /* Comprehensive Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .luxury-frame {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .hero-wrapper {
+                padding: 2rem 0.85rem 1.8rem 0.85rem;
+            }
+
+            .luxury-card {
+                padding: 2.8rem 1.2rem;
+                border-radius: 18px;
+            }
+
+            .brand-logo-img {
+                max-width: 260px;
+            }
+
+            .brand-subtitle {
+                font-size: 0.72rem;
+                letter-spacing: 8px;
+                margin-left: 8px;
+            }
+
+            .welcome-label {
+                font-size: 0.78rem;
+                letter-spacing: 5px;
+                margin-bottom: 1.5rem;
+            }
+
+            .status-badge {
+                font-size: 0.72rem;
+                letter-spacing: 3.5px;
+                padding: 0.5rem 1.3rem;
+                margin-bottom: 2rem;
+            }
+
+            .community-message-box {
+                gap: 0.95rem;
+                margin-bottom: 2.4rem;
+            }
+
+            .community-title {
+                font-size: 0.98rem;
+                letter-spacing: 2.5px;
+                line-height: 1.5;
+            }
+
+            .community-highlight {
+                font-size: 1.08rem;
+                line-height: 1.5;
+            }
+
+            .community-text {
+                font-size: 0.9rem;
+                line-height: 1.75;
+            }
+
+            .community-emphasis {
+                font-size: 0.98rem;
+                line-height: 1.65;
+            }
+
+            .timer-grid {
+                gap: 0.55rem;
+                margin-bottom: 2.4rem;
+            }
+
+            .timer-card {
+                padding: 0.9rem 0.25rem;
+                border-radius: 12px;
+            }
+
+            .timer-number {
+                font-size: 1.65rem;
+            }
+
+            .timer-unit {
+                font-size: 0.58rem;
+                letter-spacing: 1px;
+            }
+
+            .instagram-gold-btn {
+                padding: 0.95rem 2.2rem;
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero-wrapper {
+                padding: 1.4rem 0.5rem;
+            }
+
+            .luxury-card {
+                padding: 2.2rem 0.9rem;
+            }
+
+            .brand-logo-img {
+                max-width: 220px;
+            }
+
+            .timer-number {
+                font-size: 1.4rem;
+            }
+
+            .timer-unit {
+                font-size: 0.52rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Interactive Canvas Glow & Dust -->
+    <canvas id="interactiveCanvas"></canvas>
+
+    <!-- Luxury Frame Overlay -->
+    <div class="luxury-frame"></div>
+
+    <div class="hero-wrapper">
+        <div class="luxury-card">
+            <div class="gold-accent-line"></div>
+
+            <!-- Welcome Header -->
+            <div class="welcome-label">Welcome to</div>
+
+            <!-- Authentic Exact Replica Golden Logo -->
+            <div class="brand-logo-container">
+                <img src="stayra_logo_gold.png" alt="Stayra" class="brand-logo-img">
+                <div class="brand-subtitle">EXCLUSIVE</div>
+            </div>
+
+            <!-- Status Badge -->
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                Coming Soon
+            </div>
+
+            <!-- Privilege Reserved Community Message -->
+            <div class="community-message-box">
+                <h2 class="community-title">A PRIVILEGE RESERVED FOR OUR COMMUNITY</h2>
+                <p class="community-highlight">You’re not just a visitor, you’re part of an exclusive circle.</p>
+                <p class="community-text">We’re creating this space especially for you, where you’ll be the first to discover privileged offers, exclusive access, and carefully curated updates reserved for our community.</p>
+                <p class="community-emphasis">Because those who are a part of something special, deserve to be treated that way.</p>
+            </div>
+
+            <!-- Gold Diamond Divider -->
+            <div class="gold-divider">❖</div>
+
+            <!-- 5 Days Countdown Timer -->
+            <div class="timer-grid">
+                <div class="timer-card">
+                    <div class="timer-number" id="days">05</div>
+                    <div class="timer-unit">Days</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-number" id="hours">00</div>
+                    <div class="timer-unit">Hours</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-number" id="minutes">00</div>
+                    <div class="timer-unit">Minutes</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-number" id="seconds">00</div>
+                    <div class="timer-unit">Seconds</div>
+                </div>
+            </div>
+
+            <!-- Instagram Button Link -->
+            <div class="instagram-link-wrapper">
+                <a href="https://www.instagram.com/stayra.in/" target="_blank" rel="noopener noreferrer" class="instagram-gold-btn">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>FOLLOW @STAYRA.IN</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/stayra.in/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2026 STAYRA EXCLUSIVE. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Interactive Ambient Emerald & Gold Canvas
+        const canvas = document.getElementById('interactiveCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Track Mouse Movement for Ambient Aura
+        let mouseX = width / 2;
+        let mouseY = height / 2;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Dual Color Particles (Gold & Emerald)
+        const particles = Array.from({ length: 65 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 2 + 0.4,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: -Math.random() * 0.45 - 0.1,
+            alpha: Math.random() * 0.65 + 0.2,
+            isGold: Math.random() > 0.4
+        }));
+
+        function drawCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Ambient Mouse Spotlight Aura (Emerald & Gold)
+            const grad = ctx.createRadialGradient(mouseX, mouseY, 10, mouseX, mouseY, 500);
+            grad.addColorStop(0, 'rgba(20, 65, 45, 0.4)');
+            grad.addColorStop(0.5, 'rgba(212, 175, 55, 0.08)');
+            grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
+
+            // Floating Particles
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.y < 0) {
+                    p.y = height;
+                    p.x = Math.random() * width;
+                }
+                if (p.x < 0 || p.x > width) p.x = Math.random() * width;
+
+                if (p.isGold) {
+                    ctx.fillStyle = `rgba(247, 231, 180, ${p.alpha})`;
+                } else {
+                    ctx.fillStyle = `rgba(50, 160, 110, ${p.alpha * 0.8})`;
+                }
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            requestAnimationFrame(drawCanvas);
+        }
+        drawCanvas();
+
+        // 5-Day Countdown Timer Logic
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 5);
+
+        function update5DayTimer() {
+            const now = new Date();
+            const timeDiff = targetDate - now;
+
+            if (timeDiff <= 0) {
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+                return;
+            }
+
+            const d = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(d).padStart(2, '0');
+            document.getElementById('hours').innerText = String(h).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+        }
+
+        setInterval(update5DayTimer, 1000);
+        update5DayTimer();
+    </script>
+</body>
+</html>
