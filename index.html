@@ -635,7 +635,7 @@
 
             <!-- Privilege Reserved Community Message -->
             <div class="community-message-box">
-                <h2 class="community-title">A PRIVILEGE RESERVED FOR OUR COMMUNITY</h2>
+                <h2 class="community-title">PLEASE COME BACK AFTER</h2>
                 <p class="community-highlight">You’re not just a visitor, you’re part of an exclusive circle.</p>
                 <p class="community-text">We’re creating this space especially for you, where you’ll be the first to discover privileged offers, exclusive access, and carefully curated updates reserved for our community.</p>
                 <p class="community-emphasis">Because those who are a part of something special, deserve to be treated that way.</p>
@@ -644,10 +644,10 @@
             <!-- Gold Diamond Divider -->
             <div class="gold-divider">❖</div>
 
-            <!-- 5 Days Countdown Timer -->
+            <!-- 8 Days Countdown Timer -->
             <div class="timer-grid">
                 <div class="timer-card">
-                    <div class="timer-number" id="days">05</div>
+                    <div class="timer-number" id="days">08</div>
                     <div class="timer-unit">Days</div>
                 </div>
                 <div class="timer-card">
@@ -755,11 +755,11 @@
         }
         drawCanvas();
 
-        // 5-Day Countdown Timer Logic
+        // 8-Day Countdown Timer Logic
         const targetDate = new Date();
-        targetDate.setDate(targetDate.getDate() + 5);
+        targetDate.setDate(targetDate.getDate() + 8);
 
-        function update5DayTimer() {
+        function update8DayTimer() {
             const now = new Date();
             const timeDiff = targetDate - now;
 
@@ -782,8 +782,8 @@
             document.getElementById('seconds').innerText = String(s).padStart(2, '0');
         }
 
-        setInterval(update5DayTimer, 1000);
-        update5DayTimer();
+        setInterval(update8DayTimer, 1000);
+        update8DayTimer();
     </script>
 </body>
 </html>
